@@ -1,2 +1,51 @@
-[workspace]
-members = ["secure-gateway"]
+# Cargo.toml for secure-gateway
+# Defines package metadata and dependencies for aerospace protocol security gateway
+# Implements encryption, authentication, and protocol translation services
+
+[package]
+name = "secure-gateway"           # Crate name
+version = "0.1.0"                 # Semantic version
+edition = "2021"                  # Rust edition
+authors = ["Secure Gateway Team"] # Maintainers
+description = "A Rust-based Secure Device Communication Gateway for aerospace protocols"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.29", features = ["full"] } # Async foundation with threading, I/O, timers
+
+# Cryptography
+chacha20poly1305 = "0.10"  # AEAD encryption for secure transmission
+ed25519-dalek = "2.0"      # Digital signatures for authentication
+x25519-dalek = "2.0"       # ECDH key exchange
+
+rand = "0.8"               # Secure random number generation
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }  # Data structure serialization framework
+serde_json = "1.0"                                  # JSON format support
+bincode = "1.3"                                     # Efficient binary format for machine communication
+
+# Error handling
+thiserror = "1.0"  # Custom error type macros
+anyhow = "1.0"     # Error context propagation
+
+# Logging and configuration
+log = "0.4"        # Logging interface
+env_logger = "0.10" # Environment-based logger
+config = "0.13"    # Configuration from files and environment
+
+# Protocol-related
+bytes = "1.4"      # Byte buffer utilities
+nom = "7.1"        # Parser combinator for binary protocols
+
+# Testing
+mockall = "0.11"   # Mocking framework for unit tests
+tempfile = "3.19.1"
+
+[[example]]
+name = "simulation"
+path = "examples/simulation.rs"
+
+[[example]]
+name = "visual_demo"
+path = "examples/visual_demo.rs"
